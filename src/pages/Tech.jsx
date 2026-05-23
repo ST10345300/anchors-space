@@ -29,7 +29,7 @@ const ITEMS = [
 
 export default function Tech() {
   return (
-    <div className="pt-32 pb-24">
+    <div className="pt-32 pb-28 lg:pb-24">
       <Section className="mb-20 text-center">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-anchor-stone/60 text-[10px] tracking-[0.4em] uppercase text-anchor-gold">
           <Icon name="beans" size={14} />

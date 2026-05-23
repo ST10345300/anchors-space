@@ -30,68 +30,68 @@ const QUICK = [
 
 export default function Home() {
   return (
-    <div className="pt-20">
+    <div className="pt-20 pb-24 lg:pb-0">
       {/* HERO */}
-      <section className="relative min-h-[92vh] grid lg:grid-cols-2 items-center px-6 lg:px-10 max-w-7xl mx-auto">
-        <div className="relative z-10 py-16">
+      <section className="relative grid lg:grid-cols-2 lg:min-h-[92vh] items-start lg:items-center px-6 lg:px-10 max-w-7xl mx-auto">
+        <div className="relative z-10 py-10 lg:py-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-anchor-stone/60 text-[10px] tracking-[0.4em] uppercase text-anchor-gold">
             <Icon name="anchor" size={14} />
             Coffee · Focus · Purpose
           </div>
-          <h1 className="mt-7 font-display text-5xl md:text-7xl leading-[1.05] font-semibold text-anchor-paper">
+          <h1 className="mt-5 font-display text-4xl sm:text-5xl md:text-7xl leading-[1.05] font-semibold text-anchor-paper">
             <span className="text-anchor-gold">Anchor</span> your day.<br />
             Brew your <span className="italic text-anchor-cream">purpose.</span>
           </h1>
-          <p className="mt-6 max-w-md text-anchor-mist leading-relaxed">
+          <p className="mt-4 max-w-md text-anchor-mist leading-relaxed text-sm md:text-base">
             A quiet studio built for students, creators and quiet builders — slow-brewed coffee, fast Wi-Fi, deep focus.
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Link to="/workspace" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-anchor-cream text-anchor-void font-medium hover:bg-anchor-gold transition-colors">
+          <div className="mt-7 flex flex-col sm:flex-row flex-wrap gap-3">
+            <Link to="/workspace" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-anchor-cream text-anchor-void font-medium text-sm">
               <Icon name="calendar" size={16} /> Book a Study Pod
             </Link>
-            <Link to="/menu" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-anchor-stone text-anchor-cream hover:border-anchor-gold transition-colors">
+            <Link to="/menu" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-anchor-stone text-anchor-cream text-sm">
               <Icon name="order" size={16} /> Order Coffee
             </Link>
-            <Link to="/gallery" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-anchor-stone text-anchor-cream hover:border-anchor-gold transition-colors">
+            <Link to="/gallery" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-anchor-stone text-anchor-cream text-sm">
               <Icon name="gallery" size={16} /> Explore Space
             </Link>
           </div>
 
-          <div className="mt-16 grid grid-cols-3 gap-6 max-w-md">
+          <div className="mt-10 flex gap-6">
             {[
               ['hours', '07:00', 'open daily'],
-              ['wifi',  '1Gbps', 'studio Wi-Fi'],
-              ['seating','100+', 'quiet seats']
+              ['wifi',  '1Gbps', 'Wi-Fi'],
+              ['seating','100+', 'seats']
             ].map(([i, k, v]) => (
-              <div key={k} className="flex items-start gap-3">
-                <Icon name={i} size={22} className="text-anchor-gold mt-1" />
+              <div key={k} className="flex items-start gap-2">
+                <Icon name={i} size={18} className="text-anchor-gold mt-0.5 shrink-0" />
                 <div>
-                  <div className="font-display text-2xl text-anchor-paper">{k}</div>
-                  <div className="text-[10px] uppercase tracking-[0.3em] text-anchor-mist mt-1">{v}</div>
+                  <div className="font-display text-lg text-anchor-paper">{k}</div>
+                  <div className="text-[9px] uppercase tracking-[0.3em] text-anchor-mist">{v}</div>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Hero visual */}
-        <div className="w-full rounded-2xl overflow-hidden h-[70vh] lg:h-[88vh]">
+        {/* Hero visual — hidden on smallest screens, shown from sm up */}
+        <div className="hidden sm:block w-full rounded-2xl overflow-hidden h-[50vh] lg:h-[88vh] mt-4 lg:mt-0">
           <AvatarImage src="/avatars/standing-poster.webp" className="w-full h-full" eager />
         </div>
       </section>
 
       {/* QUICK ACTIONS */}
-      <Section className="py-16">
+      <Section className="py-10 lg:py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {QUICK.map((q) => (
-            <Link key={q.t} to={q.to} className="group relative p-6 rounded-2xl bg-anchor-coal/60 border border-anchor-stone/60 hover:border-anchor-gold/50 transition-all flex items-center gap-4">
-              <div className="w-12 h-12 grid place-items-center rounded-xl bg-anchor-void border border-anchor-stone/60 group-hover:border-anchor-gold/50 transition-colors">
-                <Icon name={q.icon} size={22} className="text-anchor-cream group-hover:text-anchor-gold" />
+            <Link key={q.t} to={q.to} className="group relative p-4 lg:p-6 rounded-2xl bg-anchor-coal/60 border border-anchor-stone/60 transition-all flex flex-col sm:flex-row items-start sm:items-center gap-3">
+              <div className="w-10 h-10 grid place-items-center rounded-xl bg-anchor-void border border-anchor-stone/60 shrink-0">
+                <Icon name={q.icon} size={20} className="text-anchor-cream" />
               </div>
               <div>
-                <p className="font-display text-anchor-paper">{q.t}</p>
-                <p className="text-[10px] uppercase tracking-[0.3em] text-anchor-mist mt-1">Open →</p>
+                <p className="font-display text-anchor-paper text-sm leading-tight">{q.t}</p>
+                <p className="text-[9px] uppercase tracking-[0.3em] text-anchor-mist mt-0.5">Open →</p>
               </div>
             </Link>
           ))}
@@ -99,14 +99,16 @@ export default function Home() {
       </Section>
 
       {/* PILLARS */}
-      <Section className="py-24">
+      <Section className="py-12 lg:py-24">
         <div className="grid md:grid-cols-3 gap-5">
           {PILLARS.map((c) => (
-            <div key={c.t} className="group relative p-8 rounded-2xl bg-anchor-coal/60 border border-anchor-stone/60 hover:border-anchor-gold/50 transition-colors overflow-hidden">
+            <div key={c.t} className="group relative p-5 lg:p-8 rounded-2xl bg-anchor-coal/60 border border-anchor-stone/60 transition-colors overflow-hidden flex lg:block items-start gap-4 lg:gap-0">
               <Icon name={c.icon} size={200} className="absolute -right-8 -bottom-10 text-anchor-cream/[0.04] pointer-events-none" />
-              <Icon name={c.icon} size={32} className="text-anchor-gold mb-6" />
-              <h3 className="font-display text-2xl text-anchor-paper mb-3">{c.t}</h3>
-              <p className="text-anchor-mist leading-relaxed">{c.d}</p>
+              <Icon name={c.icon} size={26} className="text-anchor-gold shrink-0 lg:mb-6 mt-0.5" />
+              <div>
+                <h3 className="font-display text-xl lg:text-2xl text-anchor-paper mb-1 lg:mb-3">{c.t}</h3>
+                <p className="text-anchor-mist leading-relaxed text-sm lg:text-base">{c.d}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -124,8 +126,8 @@ export default function Home() {
       </div>
 
       {/* BRAND GALLERY */}
-      <Section className="py-24">
-        <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
+      <Section className="py-12 lg:py-24">
+        <div className="flex items-end justify-between mb-8 lg:mb-12 flex-wrap gap-4">
           <div>
             <div className="inline-flex items-center gap-2 text-[10px] tracking-[0.4em] uppercase text-anchor-gold mb-3">
               <Icon name="community" size={14} /> A day at Anchor&apos;s
@@ -135,7 +137,7 @@ export default function Home() {
           <p className="text-anchor-mist max-w-sm">Our brand avatar moves through the studio the way you will — coffee, code, quiet, repeat.</p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-3 md:grid-cols-5 gap-3">
           {POSES.map((p, i) => (
             <motion.div
               key={p.src}
@@ -160,15 +162,15 @@ export default function Home() {
       </Section>
 
       {/* COFFEE FEATURE */}
-      <Section className="py-24 grid lg:grid-cols-2 gap-12 items-center">
-        <div className="h-[60vh] order-2 lg:order-1 rounded-2xl overflow-hidden">
+      <Section className="py-12 lg:py-24 grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="h-[45vh] lg:h-[60vh] order-2 lg:order-1 rounded-2xl overflow-hidden">
           <CupImage src="/cup.webp" className="w-full h-full" />
         </div>
         <div className="order-1 lg:order-2">
           <div className="inline-flex items-center gap-2 text-[10px] tracking-[0.4em] uppercase text-anchor-gold mb-4">
             <Icon name="coffee" size={14} /> House Brew
           </div>
-          <h2 className="font-display text-4xl md:text-5xl text-anchor-paper">A cup is a quiet contract<br /> between you and the page.</h2>
+          <h2 className="font-display text-3xl md:text-5xl text-anchor-paper">A cup is a quiet contract between you and the page.</h2>
           <p className="mt-6 text-anchor-mist leading-relaxed max-w-lg">
             We roast in small batches, dose by gram, and pour with intention. Each cup is a soft anchor for the next idea.
           </p>
@@ -179,8 +181,8 @@ export default function Home() {
       </Section>
 
       {/* MEMBERSHIP CTA */}
-      <Section className="py-24">
-        <div className="relative overflow-hidden rounded-3xl border border-anchor-stone/60 bg-gradient-to-br from-anchor-gold/10 to-anchor-coal p-10 md:p-16">
+      <Section className="py-12 lg:py-24">
+        <div className="relative overflow-hidden rounded-3xl border border-anchor-stone/60 bg-gradient-to-br from-anchor-gold/10 to-anchor-coal p-7 md:p-16">
           <Icon name="premium" size={300} className="absolute -right-10 -bottom-10 text-anchor-cream/[0.05]" />
           <div className="relative">
             <Icon name="premium" size={32} className="text-anchor-gold mb-5" />

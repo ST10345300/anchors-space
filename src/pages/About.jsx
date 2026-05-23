@@ -19,15 +19,15 @@ const TIMELINE = [
 
 export default function About() {
   return (
-    <div className="pt-32 pb-24">
-      <Section className="grid lg:grid-cols-2 gap-12 items-center mb-24">
+    <div className="pt-32 pb-28 lg:pb-24">
+      <Section className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-12 lg:mb-24">
         <div>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-anchor-stone/60 text-[10px] tracking-[0.4em] uppercase text-anchor-gold">
             <Icon name="about" size={14} />
             Our Story
           </div>
-          <h1 className="mt-5 font-display text-5xl md:text-6xl text-anchor-paper leading-tight">
-            Built by students,<br /> for the long study nights.
+          <h1 className="mt-5 font-display text-4xl md:text-6xl text-anchor-paper leading-tight">
+            Built by students, for the long study nights.
           </h1>
           <p className="mt-6 text-anchor-mist leading-relaxed max-w-lg">
             Anchor&apos;s Space began in a dorm kitchen with a stovetop moka pot and a half-finished thesis. We wanted a place that respected silence, took coffee seriously, and gave students room to think.
@@ -36,7 +36,7 @@ export default function About() {
             Today, our studio is part café, part library, part launch pad. Everything is intentional — the warm cream tones, the slow music, the way light falls on your laptop at 4pm.
           </p>
         </div>
-        <div className="h-[70vh] rounded-2xl overflow-hidden">
+        <div className="h-[45vh] lg:h-[70vh] rounded-2xl overflow-hidden">
           <AvatarImage src="/avatars/sitting-knees.webp" className="w-full h-full" />
         </div>
       </Section>

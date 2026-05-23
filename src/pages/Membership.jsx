@@ -66,7 +66,7 @@ export default function Membership() {
   const { user } = useAuth();
 
   return (
-    <div className="pt-32 pb-24">
+    <div className="pt-32 pb-28 lg:pb-24">
       <Section className="text-center mb-20">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-anchor-stone/60 text-[10px] tracking-[0.4em] uppercase text-anchor-gold">
           <Icon name="membership" size={14} />

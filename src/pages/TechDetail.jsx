@@ -307,17 +307,17 @@ export default function TechDetail() {
       <div ref={containerRef} style={{ height: `calc(${scrollHeight}px + 100vh)` }} className="relative">
         <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
 
-          {/* Top bar */}
-          <div className="absolute top-0 inset-x-0 z-20 flex items-center justify-between px-6 lg:px-12 pt-6">
+          {/* Top bar — sits below navbar (h-20) */}
+          <div className="absolute top-20 inset-x-0 z-20 flex items-center justify-between px-4 lg:px-12 pt-3 lg:pt-6">
             <Link
               to="/tech"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-anchor-void/70 border border-anchor-stone/60 text-anchor-mist text-xs tracking-[0.3em] uppercase backdrop-blur-md"
+              className="inline-flex items-center gap-2 px-3 py-1.5 lg:px-4 lg:py-2 rounded-full bg-anchor-void/70 border border-anchor-stone/60 text-anchor-mist text-[10px] lg:text-xs tracking-[0.3em] uppercase backdrop-blur-md"
             >
-              <Icon name="chevronLeft" size={13} /> Our Tech
+              <Icon name="chevronLeft" size={12} /> Our Tech
             </Link>
 
             {/* Frame counter */}
-            <div className="px-4 py-2 rounded-full bg-anchor-void/70 border border-anchor-stone/60 backdrop-blur-md text-[10px] uppercase tracking-[0.3em] text-anchor-mist">
+            <div className="px-3 py-1.5 lg:px-4 lg:py-2 rounded-full bg-anchor-void/70 border border-anchor-stone/60 backdrop-blur-md text-[10px] uppercase tracking-[0.25em] text-anchor-mist">
               {Math.round(progress * 100)}% disassembled
             </div>
           </div>
@@ -371,9 +371,9 @@ export default function TechDetail() {
           </div>
 
           {/* Bottom info bar */}
-          <div className="absolute bottom-0 inset-x-0 z-20 px-6 lg:px-12 pb-6">
+          <div className="absolute bottom-0 inset-x-0 z-20 px-4 lg:px-12 pb-4 lg:pb-6">
             {/* Progress bar */}
-            <div className="w-full h-px bg-anchor-stone/40 mb-5 rounded-full overflow-hidden">
+            <div className="w-full h-px bg-anchor-stone/40 mb-3 lg:mb-5 rounded-full overflow-hidden">
               <motion.div
                 className="h-full bg-anchor-gold rounded-full"
                 style={{ width: `${progress * 100}%` }}
@@ -381,14 +381,14 @@ export default function TechDetail() {
               />
             </div>
 
-            <div className="flex items-end justify-between gap-6 flex-wrap">
+            <div className="flex items-end justify-between gap-4">
               {/* Machine name */}
-              <div>
-                <p className="text-[10px] uppercase tracking-[0.4em] text-anchor-gold mb-1">{tech.sub}</p>
-                <h1 className="font-display text-3xl md:text-4xl text-anchor-paper">{tech.name}</h1>
+              <div className="shrink-0">
+                <p className="text-[9px] uppercase tracking-[0.35em] text-anchor-gold mb-0.5 hidden sm:block">{tech.sub}</p>
+                <h1 className="font-display text-xl lg:text-4xl text-anchor-paper leading-tight">{tech.name}</h1>
               </div>
 
-              {/* Active part detail */}
+              {/* Active part detail — hidden on small phones, shown sm+ */}
               <AnimatePresence mode="wait">
                 {activeLabel && (
                   <motion.div
@@ -397,25 +397,42 @@ export default function TechDetail() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -8 }}
                     transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    className="max-w-sm bg-anchor-void/80 border border-anchor-stone/60 rounded-2xl px-5 py-4 backdrop-blur-md"
+                    className="hidden sm:block max-w-xs bg-anchor-void/80 border border-anchor-stone/60 rounded-2xl px-4 py-3 backdrop-blur-md"
                   >
-                    <div className="flex items-center gap-3 mb-2">
-                      <span className="w-2 h-2 rounded-full bg-anchor-gold" />
-                      <span className="text-[10px] uppercase tracking-[0.35em] text-anchor-gold">{activeLabel.part}</span>
-                      <span className="ml-auto font-display text-anchor-cream text-sm">{activeLabel.stat}</span>
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-anchor-gold shrink-0" />
+                      <span className="text-[9px] uppercase tracking-[0.3em] text-anchor-gold">{activeLabel.part}</span>
+                      <span className="ml-auto font-display text-anchor-cream text-xs shrink-0">{activeLabel.stat}</span>
                     </div>
-                    <p className="text-xs text-anchor-mist leading-relaxed">{activeLabel.desc}</p>
+                    <p className="text-[11px] text-anchor-mist leading-relaxed line-clamp-2">{activeLabel.desc}</p>
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
 
-            {/* Part chips */}
-            <div className="flex gap-2 mt-4 flex-wrap">
-              {tech.labels.map((l, i) => (
+            {/* Active part — mobile only pill */}
+            <AnimatePresence mode="wait">
+              {activeLabel && (
+                <motion.div
+                  key={activeLabel.part + '-m'}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="sm:hidden mt-2 flex items-center gap-2"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-anchor-gold shrink-0" />
+                  <span className="text-[9px] uppercase tracking-[0.3em] text-anchor-gold">{activeLabel.part}</span>
+                  <span className="ml-auto font-display text-anchor-cream text-xs">{activeLabel.stat}</span>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Part chips — horizontal scroll on mobile */}
+            <div className="flex gap-2 mt-3 overflow-x-auto pb-1 scrollbar-none">
+              {tech.labels.map((l) => (
                 <div
                   key={l.part}
-                  className={`px-3 py-1 rounded-full text-[10px] uppercase tracking-[0.2em] border transition-all duration-300 ${
+                  className={`px-2.5 py-1 rounded-full text-[9px] uppercase tracking-[0.15em] border transition-all duration-300 whitespace-nowrap shrink-0 ${
                     activeLabel?.part === l.part
                       ? 'bg-anchor-gold text-anchor-void border-anchor-gold'
                       : frameIdx > l.to
@@ -432,7 +449,7 @@ export default function TechDetail() {
       </div>
 
       {/* ── Part detail cards (below scroll section) ── */}
-      <div className="max-w-5xl mx-auto px-6 lg:px-12 py-24">
+      <div className="max-w-5xl mx-auto px-4 lg:px-12 py-16 lg:py-24 pb-28 lg:pb-24">
         <div className="mb-16">
           <p className="text-[10px] uppercase tracking-[0.4em] text-anchor-gold mb-3">Annotated</p>
           <h2 className="font-display text-4xl text-anchor-paper">Every part, explained.</h2>

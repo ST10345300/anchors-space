@@ -27,7 +27,7 @@ export default function Contact() {
   }
 
   return (
-    <div className="pt-32 pb-24">
+    <div className="pt-32 pb-28 lg:pb-24">
       <Section className="grid lg:grid-cols-2 gap-16 items-start">
         <div>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-anchor-stone/60 text-[10px] tracking-[0.4em] uppercase text-anchor-gold">
@@ -89,7 +89,7 @@ export default function Contact() {
         </div>
 
         <div className="relative">
-          <div className="h-[60vh] rounded-2xl overflow-hidden">
+          <div className="h-[40vh] lg:h-[60vh] rounded-2xl overflow-hidden">
             <AvatarImage src="/avatars/drinking-block.webp" className="w-full h-full" />
           </div>
 

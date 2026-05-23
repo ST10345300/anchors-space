@@ -20,7 +20,7 @@ export default function Workspace() {
   const [time, setTime] = useState('10:00');
 
   return (
-    <div className="pt-32 pb-24">
+    <div className="pt-32 pb-28 lg:pb-24">
       {/* HERO */}
       <Section className="grid lg:grid-cols-2 gap-12 items-center mb-24">
         <div>
@@ -40,7 +40,7 @@ export default function Workspace() {
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-anchor-coal border border-anchor-stone/60 text-xs text-anchor-paper"><Icon name="lockers" size={14} className="text-anchor-gold" /> Day lockers</span>
           </div>
         </div>
-        <div className="h-[70vh] rounded-2xl overflow-hidden">
+        <div className="h-[45vh] lg:h-[70vh] rounded-2xl overflow-hidden">
           <AvatarImage src="/avatars/sitting-laptop.webp" className="w-full h-full" />
         </div>
       </Section>

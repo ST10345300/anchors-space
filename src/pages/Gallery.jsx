@@ -21,7 +21,7 @@ export default function Gallery() {
   const [open, setOpen] = useState(null);
 
   return (
-    <div className="pt-32 pb-24">
+    <div className="pt-32 pb-28 lg:pb-24">
       <Section className="mb-12">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-anchor-stone/60 text-[10px] tracking-[0.4em] uppercase text-anchor-gold">
           <Icon name="gallery" size={14} />
@@ -34,7 +34,7 @@ export default function Gallery() {
       </Section>
 
       <Section>
-        <div className="grid grid-cols-2 md:grid-cols-3 auto-rows-[200px] gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 auto-rows-[140px] md:auto-rows-[200px] gap-3 md:gap-4">
           {TILES.map((t, i) => (
             <motion.button
               key={t.label}

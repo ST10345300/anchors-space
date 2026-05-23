@@ -33,14 +33,14 @@ export default function Merch() {
   const items = tab === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.tag === tab);
 
   return (
-    <div className="pt-32 pb-24">
-      <Section className="flex flex-wrap justify-between items-end gap-6 mb-12">
+    <div className="pt-32 pb-28 lg:pb-24">
+      <Section className="flex flex-wrap justify-between items-end gap-4 mb-8 lg:mb-12">
         <div>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-anchor-stone/60 text-[10px] tracking-[0.4em] uppercase text-anchor-gold">
             <Icon name="merch" size={14} />
             Merch
           </div>
-          <h1 className="mt-5 font-display text-5xl md:text-6xl text-anchor-paper leading-tight">The Studio Shop.</h1>
+          <h1 className="mt-5 font-display text-4xl md:text-6xl text-anchor-paper leading-tight">The Studio Shop.</h1>
           <p className="mt-4 text-anchor-mist max-w-lg">Quiet branding, honest materials. Made for long study sessions and slow mornings.</p>
         </div>
         <button
@@ -89,19 +89,12 @@ export default function Merch() {
               </div>
 
               {/* Info row */}
-              <div className="px-4 py-4 border-t border-anchor-stone/60 flex items-center justify-between gap-2">
-                <div className="min-w-0">
-                  <p className="font-display text-anchor-paper truncate">{p.name}</p>
-                  <p className="text-xs text-anchor-mist uppercase tracking-[0.2em] mt-0.5">{p.color}</p>
+              <div className="px-3 py-3 border-t border-anchor-stone/60">
+                <div className="flex items-center justify-between gap-2">
+                  <p className="font-display text-anchor-paper text-sm truncate">{p.name}</p>
+                  <span className="text-anchor-gold font-display text-sm shrink-0">{p.price}</span>
                 </div>
-                <div className="flex items-center gap-2 shrink-0">
-                  <span className="text-anchor-gold font-display">{p.price}</span>
-                </div>
-              </div>
-
-              {/* Tap hint */}
-              <div className="px-4 pb-4">
-                <span className="text-[10px] tracking-[0.25em] uppercase text-anchor-mist">Tap to view details →</span>
+                <p className="text-[10px] text-anchor-mist uppercase tracking-[0.2em] mt-0.5">{p.color} · tap to view</p>
               </div>
             </motion.div>
           ))}
