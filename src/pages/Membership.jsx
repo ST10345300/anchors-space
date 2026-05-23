@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Section from '../components/Section';
 import Icon from '../components/Icon';
-import { Link } from 'react-router-dom';
+import MembershipModal from '../components/MembershipModal';
+import { useAuth } from '../context/AuthContext';
 
 const TIERS = [
   {
@@ -61,6 +62,9 @@ const TIERS = [
 ];
 
 export default function Membership() {
+  const [joinTier, setJoinTier] = useState(null);
+  const { user } = useAuth();
+
   return (
     <div className="pt-32 pb-24">
       <Section className="text-center mb-20">
@@ -74,6 +78,13 @@ export default function Membership() {
         <p className="mt-5 text-anchor-mist max-w-xl mx-auto leading-relaxed">
           Four tiers shaped around how you actually work. No contracts, cancel anytime, drinks included.
         </p>
+
+        {user?.membership && (
+          <div className="mt-8 inline-flex items-center gap-3 px-5 py-3 rounded-full bg-anchor-gold/10 border border-anchor-gold/40 text-anchor-cream text-sm">
+            <Icon name="anchor" size={16} className="text-anchor-gold" />
+            Active: <strong className="text-anchor-gold">{user.membership}</strong>
+          </div>
+        )}
       </Section>
 
       <Section>
@@ -85,11 +96,15 @@ export default function Membership() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className={`relative p-7 rounded-2xl border transition-all ${t.featured ? 'bg-gradient-to-b from-anchor-gold/10 to-anchor-coal/80 border-anchor-gold/50' : 'bg-anchor-coal/60 border-anchor-stone/60 hover:border-anchor-gold/50'}`}
+              className={`relative p-7 rounded-2xl border ${t.featured ? 'bg-gradient-to-b from-anchor-gold/10 to-anchor-coal/80 border-anchor-gold/50' : 'bg-anchor-coal/60 border-anchor-stone/60'}`}
             >
               {t.featured && (
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-anchor-gold text-anchor-void text-[10px] tracking-[0.3em] uppercase">Most loved</span>
               )}
+              {user?.membership === t.name && (
+                <span className="absolute -top-3 right-5 px-3 py-1 rounded-full bg-anchor-cream text-anchor-void text-[10px] tracking-[0.3em] uppercase">Active</span>
+              )}
+
               <Icon name={t.icon} size={32} className="text-anchor-cream" />
               <h3 className="mt-4 font-display text-2xl text-anchor-paper">{t.name}</h3>
               <p className="text-xs text-anchor-mist mt-1">{t.tag}</p>
@@ -108,10 +123,13 @@ export default function Membership() {
                 ))}
               </ul>
 
-              <Link to="/contact" className={`mt-7 w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-medium transition-colors ${t.featured ? 'bg-anchor-cream text-anchor-void hover:bg-anchor-gold' : 'border border-anchor-stone/60 text-anchor-cream hover:border-anchor-gold'}`}>
+              <button
+                onClick={() => setJoinTier(t.name)}
+                className={`mt-7 w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-medium transition-colors ${t.featured ? 'bg-anchor-cream text-anchor-void' : 'border border-anchor-stone/60 text-anchor-cream'}`}
+              >
                 <Icon name="signup" size={16} />
-                Join
-              </Link>
+                {user?.membership === t.name ? 'Manage Pass' : 'Join Now'}
+              </button>
             </motion.div>
           ))}
         </div>
@@ -137,6 +155,10 @@ export default function Membership() {
           ))}
         </div>
       </Section>
+
+      {joinTier && (
+        <MembershipModal defaultTier={joinTier} onClose={() => setJoinTier(null)} />
+      )}
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
 /**
  * Anchor's Space icon system — thin-line, rounded caps, currentColor.
@@ -386,6 +385,20 @@ const ICONS = {
     </>
   ),
 
+  // NAVIGATION ---------------------------------------------------------
+  chevronLeft: (
+    <path {...S} d="M20 8 L12 16 L20 24" />
+  ),
+  chevronRight: (
+    <path {...S} d="M12 8 L20 16 L12 24" />
+  ),
+  close: (
+    <>
+      <line {...S} x1="8" y1="8" x2="24" y2="24" />
+      <line {...S} x1="24" y1="8" x2="8" y2="24" />
+    </>
+  ),
+
   // BRANDMARK ----------------------------------------------------------
   anchor: (
     <>
@@ -412,17 +425,15 @@ export default function Icon({ name, size = 24, className = '', strokeWidth, ...
     : content;
 
   return (
-    <motion.svg
+    <svg
       width={size}
       height={size}
       viewBox="0 0 32 32"
-      className={`inline-block transition-[filter,transform] duration-300 ease-out hover:[filter:drop-shadow(0_0_10px_rgba(198,168,125,0.55))] hover:-translate-y-0.5 ${className}`}
-      whileHover={{ scale: 1.06 }}
-      whileTap={{ scale: 0.96 }}
+      className={`inline-block ${className}`}
       {...rest}
     >
       {styled}
-    </motion.svg>
+    </svg>
   );
 }
 

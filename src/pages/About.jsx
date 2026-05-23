@@ -3,6 +3,7 @@ import Section from '../components/Section';
 import AvatarImage from '../components/AvatarImage';
 import Icon from '../components/Icon';
 
+
 const BELIEFS = [
   { i: 'quiet',      t: 'Quiet is a feature',  d: 'We protect silence the way other places protect Wi-Fi passwords.' },
   { i: 'beans',      t: 'Coffee is craft',     d: 'Every cup is weighed, timed, and tasted. No shortcuts at the bar.' },
@@ -35,9 +36,8 @@ export default function About() {
             Today, our studio is part café, part library, part launch pad. Everything is intentional — the warm cream tones, the slow music, the way light falls on your laptop at 4pm.
           </p>
         </div>
-        <div className="h-[70vh] relative">
-          <AvatarImage src="/avatars/cross-legged.png" glow={0.7} className="absolute inset-0" />
-          <Icon name="anchor" size={420} className="absolute inset-0 m-auto text-anchor-cream/[0.04] pointer-events-none" />
+        <div className="h-[70vh] rounded-2xl overflow-hidden">
+          <AvatarImage src="/avatars/sitting-knees.webp" className="w-full h-full" />
         </div>
       </Section>
 

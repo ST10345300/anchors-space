@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Section from '../components/Section';
 import AvatarImage from '../components/AvatarImage';
-import CupImage from '../components/CupImage';
 import Icon from '../components/Icon';
 
 const HOURS = [
@@ -90,9 +89,8 @@ export default function Contact() {
         </div>
 
         <div className="relative">
-          <div className="h-[60vh] relative">
-            <AvatarImage src="/avatars/drinking.png" glow={0.7} className="absolute inset-0 z-10" />
-            <CupImage className="absolute top-10 -right-4 w-36 h-48 z-20" glow={0.65} />
+          <div className="h-[60vh] rounded-2xl overflow-hidden">
+            <AvatarImage src="/avatars/drinking-block.webp" className="w-full h-full" />
           </div>
 
           {/* Map card */}

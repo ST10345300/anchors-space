@@ -4,14 +4,15 @@ import { motion } from 'framer-motion';
 import Section from '../components/Section';
 import AvatarImage from '../components/AvatarImage';
 import CupImage from '../components/CupImage';
+
 import Icon from '../components/Icon';
 
 const POSES = [
-  { src: '/avatars/sitting-laptop.png', label: 'Deep work',   icon: 'workspace' },
-  { src: '/avatars/cross-legged.png',   label: 'Studio mode', icon: 'study' },
-  { src: '/avatars/standing-cup.png',   label: 'Coffee run',  icon: 'coffee' },
-  { src: '/avatars/drinking.png',       label: 'First sip',   icon: 'mug' },
-  { src: '/avatars/phone.png',          label: 'Lo-fi break', icon: 'nightPass' }
+  { src: '/avatars/sitting-laptop.webp',  label: 'Deep Work',   icon: 'workspace' },
+  { src: '/avatars/leaning.webp',         label: 'Studio Mode', icon: 'study' },
+  { src: '/avatars/standing-cup.webp',    label: 'Coffee Run',  icon: 'coffee' },
+  { src: '/avatars/drinking.webp',        label: 'First Sip',   icon: 'mug' },
+  { src: '/avatars/sitting-cream.webp',   label: 'Focus Mode',  icon: 'nightPass' }
 ];
 
 const PILLARS = [
@@ -75,11 +76,8 @@ export default function Home() {
         </div>
 
         {/* Hero visual */}
-        <div className="relative h-[70vh] lg:h-[88vh]">
-          <AvatarImage src="/avatars/standing-cup.png" className="absolute inset-0 z-10" glow={0.7} />
-          <CupImage className="absolute top-6 -left-4 w-40 h-52 z-20" glow={0.7} />
-          {/* faint anchor watermark */}
-          <Icon name="anchor" size={420} className="absolute -right-20 top-1/2 -translate-y-1/2 text-anchor-cream/[0.035] pointer-events-none" />
+        <div className="w-full rounded-2xl overflow-hidden h-[70vh] lg:h-[88vh]">
+          <AvatarImage src="/avatars/standing-poster.webp" className="w-full h-full" eager />
         </div>
       </section>
 
@@ -114,6 +112,17 @@ export default function Home() {
         </div>
       </Section>
 
+      {/* INTERIOR BANNER */}
+      <div className="relative h-[55vh] overflow-hidden my-4">
+        <img src="/hallway/coffee-bar.webp" alt="Anchor's Space Coffee Bar" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-anchor-void via-anchor-void/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-anchor-void/60 to-transparent" />
+        <div className="absolute bottom-10 left-10 lg:left-20">
+          <p className="text-[10px] tracking-[0.4em] uppercase text-anchor-gold mb-2">The Space</p>
+          <h2 className="font-display text-3xl md:text-4xl text-anchor-paper max-w-md">Where the coffee bar meets<br /> the quiet side of campus.</h2>
+        </div>
+      </div>
+
       {/* BRAND GALLERY */}
       <Section className="py-24">
         <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
@@ -134,17 +143,16 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="relative aspect-[2/3] rounded-2xl bg-anchor-coal/80 border border-anchor-stone/60 overflow-hidden group hover:border-anchor-gold/50 transition-all"
+              className="relative aspect-[2/3] rounded-2xl overflow-hidden border border-anchor-stone/60"
             >
-              <div className="absolute inset-0 opacity-90 group-hover:opacity-100 transition-opacity">
-                <AvatarImage src={p.src} glow={0.45} />
-              </div>
+              <img src={p.src} alt={p.label} loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover object-top" />
+              <div className="absolute inset-0 bg-gradient-to-t from-anchor-void/80 via-transparent to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-4 z-10 flex items-end justify-between">
                 <div>
                   <p className="text-[10px] uppercase tracking-[0.3em] text-anchor-gold">0{i + 1}</p>
                   <p className="font-display text-anchor-paper">{p.label}</p>
                 </div>
-                <Icon name={p.icon} size={20} className="text-anchor-cream/70 group-hover:text-anchor-gold" />
+                <Icon name={p.icon} size={20} className="text-anchor-cream/70" />
               </div>
             </motion.div>
           ))}
@@ -153,10 +161,8 @@ export default function Home() {
 
       {/* COFFEE FEATURE */}
       <Section className="py-24 grid lg:grid-cols-2 gap-12 items-center">
-        <div className="h-[60vh] order-2 lg:order-1 relative">
-          <CupImage className="absolute inset-0" glow={0.65} />
-          <Icon name="beans" size={56} className="absolute top-10 left-10 text-anchor-cream/30 animate-float" />
-          <Icon name="coffee" size={42} className="absolute bottom-14 right-14 text-anchor-cream/30" />
+        <div className="h-[60vh] order-2 lg:order-1 rounded-2xl overflow-hidden">
+          <CupImage src="/cup.webp" className="w-full h-full" />
         </div>
         <div className="order-1 lg:order-2">
           <div className="inline-flex items-center gap-2 text-[10px] tracking-[0.4em] uppercase text-anchor-gold mb-4">

@@ -2,22 +2,34 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Section from '../components/Section';
 import Icon from '../components/Icon';
+import ProductModal from '../components/ProductModal';
+import { useCart } from '../context/CartContext';
 
 const PRODUCTS = [
-  { name: 'Anchor Hoodie',     price: 'R849', icon: 'hoodie',     tag: 'apparel' },
-  { name: 'Studio Tee',        price: 'R349', icon: 'apparel',    tag: 'apparel' },
-  { name: 'Focus Notebook',    price: 'R189', icon: 'notebook',   tag: 'stationery' },
-  { name: 'House Mug',         price: 'R149', icon: 'mug',        tag: 'drinkware' },
-  { name: 'Studio Bottle',     price: 'R249', icon: 'bottle',     tag: 'drinkware' },
-  { name: 'Single Origin Bag', price: 'R220', icon: 'coffeeBags', tag: 'coffee' },
-  { name: 'House Blend Bag',   price: 'R180', icon: 'coffeeBags', tag: 'coffee' },
-  { name: 'Studio Tote',       price: 'R220', icon: 'merch',      tag: 'apparel' },
+  { name: 'Anchor Cap',       price: 'R299', img: '/merch/cap-black.webp',      tag: 'apparel',    color: 'Black' },
+  { name: 'Studio Cap',       price: 'R299', img: '/merch/cap-cream.webp',      tag: 'apparel',    color: 'Cream' },
+  { name: 'Anchor Beanie',    price: 'R249', img: '/merch/beanie-black.webp',   tag: 'apparel',    color: 'Black' },
+  { name: 'Studio Beanie',    price: 'R249', img: '/merch/beanie-cream.webp',   tag: 'apparel',    color: 'Cream' },
+  { name: 'Focus Beanie',     price: 'R249', img: '/merch/beanie-blue.webp',    tag: 'apparel',    color: 'Sky'   },
+  { name: 'Anchor Hoodie',    price: 'R849', img: '/merch/hoodie-black.webp',   tag: 'apparel',    color: 'Black' },
+  { name: 'Studio Hoodie',    price: 'R849', img: '/merch/hoodie-cream.webp',   tag: 'apparel',    color: 'Cream' },
+  { name: 'Sky Hoodie',       price: 'R849', img: '/merch/hoodie-blue.webp',    tag: 'apparel',    color: 'Sky'   },
+  { name: 'House Mug',        price: 'R149', img: '/merch/mug-cream.webp',      tag: 'drinkware',  color: 'Cream' },
+  { name: 'Matte Mug',        price: 'R149', img: '/merch/mug-black.webp',      tag: 'drinkware',  color: 'Black' },
+  { name: 'Focus Tumbler',    price: 'R349', img: '/merch/tumbler-black.webp',  tag: 'drinkware',  color: 'Black' },
+  { name: 'Studio Tumbler',   price: 'R349', img: '/merch/tumbler-cream.webp',  tag: 'drinkware',  color: 'Cream' },
+  { name: 'House Blend',      price: 'R220', img: '/merch/beans-cream.webp',    tag: 'coffee',     color: 'Light' },
+  { name: 'Dark Roast',       price: 'R220', img: '/merch/beans-black.webp',    tag: 'coffee',     color: 'Dark'  },
+  { name: 'Focus Notebook',   price: 'R189', img: '/merch/notebook-black.webp', tag: 'stationery', color: 'Black' },
+  { name: 'Studio Notebook',  price: 'R189', img: '/merch/notebook-cream.webp', tag: 'stationery', color: 'Cream' },
 ];
 
 const FILTERS = ['all', 'apparel', 'drinkware', 'stationery', 'coffee'];
 
 export default function Merch() {
   const [tab, setTab] = useState('all');
+  const [selected, setSelected] = useState(null);
+  const { count, setOpen } = useCart();
   const items = tab === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.tag === tab);
 
   return (
@@ -31,21 +43,28 @@ export default function Merch() {
           <h1 className="mt-5 font-display text-5xl md:text-6xl text-anchor-paper leading-tight">The Studio Shop.</h1>
           <p className="mt-4 text-anchor-mist max-w-lg">Quiet branding, honest materials. Made for long study sessions and slow mornings.</p>
         </div>
-        <div className="flex items-center gap-3">
-          <button className="w-10 h-10 grid place-items-center rounded-full border border-anchor-stone/60 text-anchor-cream hover:border-anchor-gold transition-colors">
-            <Icon name="wishlist" size={18} />
-          </button>
-          <button className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-anchor-stone/60 text-anchor-cream hover:border-anchor-gold transition-colors text-sm">
-            <Icon name="cart" size={16} />
-            Cart · 0
-          </button>
-        </div>
+        <button
+          onClick={() => setOpen(true)}
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-anchor-stone/60 text-anchor-cream text-sm relative"
+        >
+          <Icon name="cart" size={16} />
+          View Cart
+          {count > 0 && (
+            <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-anchor-gold text-anchor-void text-[10px] font-bold grid place-items-center">
+              {count}
+            </span>
+          )}
+        </button>
       </Section>
 
       <Section className="mb-10">
         <div className="flex flex-wrap gap-2">
           {FILTERS.map(f => (
-            <button key={f} onClick={() => setTab(f)} className={`px-4 py-2 rounded-full text-xs uppercase tracking-[0.25em] transition-all ${tab === f ? 'bg-anchor-cream text-anchor-void' : 'bg-anchor-coal text-anchor-mist hover:text-anchor-cream border border-anchor-stone/60'}`}>
+            <button
+              key={f}
+              onClick={() => setTab(f)}
+              className={`px-4 py-2 rounded-full text-xs uppercase tracking-[0.25em] transition-all ${tab === f ? 'bg-anchor-cream text-anchor-void' : 'bg-anchor-coal text-anchor-mist border border-anchor-stone/60'}`}
+            >
               {f}
             </button>
           ))}
@@ -60,31 +79,39 @@ export default function Merch() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.05, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="group relative rounded-2xl bg-anchor-coal/60 border border-anchor-stone/60 hover:border-anchor-gold/50 transition-all overflow-hidden"
+              transition={{ delay: i * 0.04, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              onClick={() => setSelected(p)}
+              className="rounded-2xl bg-anchor-coal/60 border border-anchor-stone/60 overflow-hidden cursor-pointer"
             >
-              <div className="aspect-square grid place-items-center relative">
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"
-                     style={{ background: 'radial-gradient(circle at 50% 50%, rgba(198,168,125,0.18), transparent 60%)' }} />
-                <Icon name={p.icon} size={88} className="text-anchor-cream relative z-10 transition-transform duration-500 group-hover:scale-110" />
+              {/* Product photo */}
+              <div className="aspect-square overflow-hidden">
+                <img src={p.img} alt={p.name} loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
-              <div className="px-5 py-4 border-t border-anchor-stone/60 flex items-center justify-between">
-                <div>
-                  <p className="font-display text-anchor-paper">{p.name}</p>
-                  <p className="text-xs text-anchor-mist uppercase tracking-[0.2em] mt-1">{p.tag}</p>
+
+              {/* Info row */}
+              <div className="px-4 py-4 border-t border-anchor-stone/60 flex items-center justify-between gap-2">
+                <div className="min-w-0">
+                  <p className="font-display text-anchor-paper truncate">{p.name}</p>
+                  <p className="text-xs text-anchor-mist uppercase tracking-[0.2em] mt-0.5">{p.color}</p>
                 </div>
-                <p className="text-anchor-gold font-display">{p.price}</p>
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="text-anchor-gold font-display">{p.price}</span>
+                </div>
               </div>
-              <button className="absolute top-3 right-3 w-9 h-9 grid place-items-center rounded-full bg-anchor-void/70 text-anchor-cream backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all hover:text-anchor-gold">
-                <Icon name="wishlist" size={16} />
-              </button>
-              <button className="absolute bottom-20 right-4 w-10 h-10 grid place-items-center rounded-full bg-anchor-cream text-anchor-void translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all">
-                <Icon name="cart" size={18} />
-              </button>
+
+              {/* Tap hint */}
+              <div className="px-4 pb-4">
+                <span className="text-[10px] tracking-[0.25em] uppercase text-anchor-mist">Tap to view details →</span>
+              </div>
             </motion.div>
           ))}
         </div>
       </Section>
+
+      {/* Product detail modal */}
+      {selected && (
+        <ProductModal product={selected} onClose={() => setSelected(null)} />
+      )}
     </div>
   );
 }
